@@ -17,14 +17,14 @@ public class TestingDatabase extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        // define database Parameters
         db =
                 openOrCreateDatabase("TestingData.db",
                         SQLiteDatabase.CREATE_IF_NECESSARY, null);
         db.setVersion(2);
         db.setLocale(Locale.getDefault());
         db.setLockingEnabled(true);
-
+           //SQL for creating database
         final String CREATE_TABLE_SESSION =
                 "CREATE TABLE sessions ("
                         + "session_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -33,7 +33,7 @@ public class TestingDatabase extends Activity {
         db.execSQL(CREATE_TABLE_SESSION);
 
     }
-
+       //inserting values to the database
     public void insertRow() {
         ContentValues stateValues = new ContentValues();
         stateValues.put("startUnixTimestamp", Long.toString(System
@@ -45,7 +45,7 @@ public class TestingDatabase extends Activity {
             // catch code
         }
     }
-
+    // Retrieveing data from SQlite databse
     public Cursor getLastInsertedRow() {
         String selectQuery = "select * from sessions limit 1";
         Cursor cursor = db.rawQuery(selectQuery, null);
